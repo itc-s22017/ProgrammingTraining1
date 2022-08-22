@@ -26,6 +26,7 @@ class Game:
 
         self.canvas.bind_all("<KeyPress-space>", self.ball.start)
 
+
     def main(self):
         self.update()
         self.tk.mainloop()

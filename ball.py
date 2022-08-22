@@ -25,14 +25,12 @@ class Ball:
             35, 20, text=f"Count:{self.count}", tag="text"
         )
 
-    def slf(self):
-        self.speed += 10
 
     def start(self, evt):
         if self.speed != 0:
             return
         self.canvas.moveto(self.id, self.init_x, self.init_y)
-        self.speed = 10
+        self.speed = 3
         self.angle = math.radians(random.choice(list(range(20, 65, 5))))
         self.direction = random.choice([1, -1])  # xの向きをランダムに。
 
@@ -72,8 +70,8 @@ class Ball:
         exit()
 
     def speeds(self):
-        self.x *= 1.02
-        self.y *= 1.02
+        self.x *= 1.05
+        self.y *= 1.05
 
     def draw(self):
         self.canvas.move(self.id, self.x, self.y)
