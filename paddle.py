@@ -2,10 +2,11 @@ import tkinter
 
 
 class Paddle:
+
     def __init__(self, canvas, color):
 
         self.canvas = canvas
-        self.id = self.canvas.create_rectangle(0, 0, 300, 1000, fill=color)
+        self.id = self.canvas.create_rectangle(0, 0, 400, 1000, fill=color)
         self.canvas_width = self.canvas.winfo_width()
         self.canvas_height = self.canvas.winfo_height()
         self.x = 0

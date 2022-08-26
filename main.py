@@ -13,19 +13,18 @@ class Game:
         self.tk.wm_attributes("-topmost", True)
 
         self.canvas = Canvas(
-            self.tk, width=500, height=700, bd=False, highlightthickness=False
+            self.tk, width=700, height=700, bd=False, highlightthickness=False
         )
 
         self.canvas.pack()
         self.tk.update()
 
-        self.paddle = Paddle(self.canvas,"red")
+        self.paddle = Paddle(self.canvas, "green")
         self.ball = Ball(self.canvas, "red", self.paddle)
         self.canvas.bind_all("<KeyPress-Left>", self.paddle.turn_left)
         self.canvas.bind_all("<KeyPress-Right>", self.paddle.turn_right)
 
         self.canvas.bind_all("<KeyPress-space>", self.ball.start)
-
 
     def main(self):
         self.update()

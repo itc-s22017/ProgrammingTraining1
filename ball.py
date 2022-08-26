@@ -1,5 +1,6 @@
 import math
 import random
+import sys
 import time
 import tkinter
 
@@ -17,6 +18,7 @@ class Ball:
         self.init_x = self.canvas_width / 2 - 7.5
         self.init_y = self.canvas_height / 2 - 7.5
         self.speed = 0
+        self.speed2 = 5
         self.count = 0
         self.count2 = 0
         self.x = 0
@@ -26,8 +28,8 @@ class Ball:
             35, 20, text=f"Count:{self.count}", tag="text"
         )
 
-        self.button = tkinter.Button(self.canvas, text="A", command=self.auto)
-        self.button.place(x=300, y=5)
+        # self.button = tkinter.Button(self.canvas, text="A", command=self.delu)
+        # self.button.place(x=300, y=5)
 
     def start(self, evt):
         if self.speed != 0:
@@ -54,18 +56,18 @@ class Ball:
             self.canvas_width // 2,
             self.canvas_height // 2,
             text="GAME OVER",
-            font=("", 40),
+            font=("sans-serif", 40),
             fill="blue",
         )
         self.btn = tkinter.Button(
             self.canvas,
-            text="Quit",
+            text="QUIT",
             command=self.ex,
             width=20,
             height=2,
             fg="blue",
             bg="cyan",
-            font=("", 10),
+            font=("sans-serif", 10),
         )
         self.btn.place(x=self.canvas_width // 2 - 90, y=self.canvas_height // 2 + 50)
 
@@ -73,7 +75,7 @@ class Ball:
         exit()
 
     def speeds(self):
-        if 0 <= self.count2 <= 30:
+        if 0 <= self.count2 <= 50:
             self.count2 += 1
             self.x *= 1.05
             self.y *= 1.05
@@ -84,7 +86,7 @@ class Ball:
         pos = self.canvas.coords(self.id)
 
         if pos[0] <= 0:
-            self.auto("+")
+            self.auto()
             self.speeds()
             self.fix(pos[0] - 0, 0)
 
@@ -112,8 +114,9 @@ class Ball:
             self.fix(0, pos[3] - paddle_pos[1])
             self.c()
 
-    def auto(self, num):
-        self.paddle.x = f"{num}10"
+    def auto(self, num="+"):
+        self.speed2 *= 1.07
+        self.paddle.x = f"{num}{self.speed2}"
 
     def fix(self, diff_x, diff_y):
         self.canvas.move(self.id, -(diff_x * 2), -(diff_y * 2))
