@@ -115,7 +115,7 @@ class Ball:
             self.c()
 
     def auto(self, num="+"):
-        self.speed2 *= 1.07
+        self.speed2 *= 1.04
         self.paddle.x = f"{num}{self.speed2}"
 
     def fix(self, diff_x, diff_y):
