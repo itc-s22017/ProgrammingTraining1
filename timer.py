@@ -10,7 +10,7 @@ class Timer:
         self.flag = False
         self.after_id = 0
         self.label = tkinter.Label(self.canvas, text="0.00")
-        self.label.place(x=950, y=10)
+        self.label.place(x=660, y=10)
 
     def update_time(self):
         self.after_id = self.canvas.after(10, self.update_time)
