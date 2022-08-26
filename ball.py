@@ -18,6 +18,7 @@ class Ball:
         self.init_y = self.canvas_height / 2 - 7.5
         self.speed = 0
         self.count = 0
+        self.count2 = 0
         self.x = 0
         self.y = 0
 
@@ -25,12 +26,14 @@ class Ball:
             35, 20, text=f"Count:{self.count}", tag="text"
         )
 
+        self.button = tkinter.Button(self.canvas, text="A", command=self.auto)
+        self.button.place(x=300, y=5)
 
     def start(self, evt):
         if self.speed != 0:
             return
         self.canvas.moveto(self.id, self.init_x, self.init_y)
-        self.speed = 3
+        self.speed = 5
         self.angle = math.radians(random.choice(list(range(20, 65, 5))))
         self.direction = random.choice([1, -1])  # xの向きをランダムに。
 
@@ -70,19 +73,27 @@ class Ball:
         exit()
 
     def speeds(self):
-        self.x *= 1.05
-        self.y *= 1.05
+        if 0 <= self.count2 <= 30:
+            self.count2 += 1
+            self.x *= 1.05
+            self.y *= 1.05
 
     def draw(self):
         self.canvas.move(self.id, self.x, self.y)
+        global pos
         pos = self.canvas.coords(self.id)
+
         if pos[0] <= 0:
+            self.auto("+")
             self.speeds()
             self.fix(pos[0] - 0, 0)
+
         if pos[1] <= 0:
             self.speeds()
             self.fix(0, pos[1])
+
         if pos[2] >= self.canvas_width:
+            self.auto("-")
             self.speeds()
             self.fix(pos[2] - self.canvas_width, 0)
 
@@ -100,6 +111,9 @@ class Ball:
         ):
             self.fix(0, pos[3] - paddle_pos[1])
             self.c()
+
+    def auto(self, num):
+        self.paddle.x = f"{num}10"
 
     def fix(self, diff_x, diff_y):
         self.canvas.move(self.id, -(diff_x * 2), -(diff_y * 2))
